@@ -1,0 +1,129 @@
+<div class ="container">
+
+  <div class="display-4 text-center">Cadastro Professores</div>
+
+   <form [formGroup]="FormGroupTeacher">
+   <div class="mb-3">
+      <label for="inputId" class="form-label">ID</label>
+      <input formControlName="id" type="text" class="form-control" id="inputId">
+    </div>
+    
+    <div class="mb-3">
+      <label for="inputName" class="form-label">Nome</label>
+      <input formControlName="name" type="text" class="form-control" id="inputName">
+    </div>
+
+    <div class="mb-3">
+      <label for="inputEmail" class="form-label">Email</label>
+      <input formControlName="email" type="text" class="form-control" id="inputEmail">
+    </div>
+
+
+    
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" formControlName="teste" id="teste">
+      <label class="form-check-label" for="teste">checkbox</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" formControlName="teste2" id="teste2">
+      <label class="form-check-label" for="teste">checkbox</label>
+    </div><br>
+
+
+
+
+          <div class="form-check">
+    <input class="form-check-input" type="radio" formControlName="turno" id="turnoTarde" value="Tarde">
+    <label class="form-check-label" for="turnoTarde">
+      radio button
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" formControlName="turno" id="turnoNoite" value="Noite">
+    <label class="form-check-label" for="turnoNoite">
+      radion button
+    </label>
+  </div><br>
+
+  
+    <button *ngIf="!isEditing" type="submit" class="btn btn-primary" (click)="save()">Salvar</button>
+    <button *ngIf="isEditing" type="submit" class="btn btn-primary" (click)="update()">Atualizar</button>
+  </form>
+
+
+
+  <br>Total de professores cadastrados: {{teachers.length}}<br><br>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of teachers">
+      <th scope="row">{{p.id}}</th>
+      <td>{{p.name}}</td>
+      <td>{{p.email}}</td>
+      <td>{{ getSubjects(p) }}</td>
+      <td>{{p.turno}}</td>
+
+
+<div class="font2">Professores Cadastrados:</div><br>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let c of teachers">
+      <div class="card mt-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ c.name }} - {{ c.id }}</h5>
+          <p class="card-text">
+            <strong>Email:</strong> {{ c.email }} <br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+        <div class="row">
+    <div *ngFor="let p of teachers" class="col-md-4">
+      <div class="card shadow mt-3" style="width: 300px;">
+        <img src="assets/images/student.png" class="card-img-top" alt="Foto Professor">
+        <div class="card-body">
+          <h5 class="card-title">{{ p.name }}</h5>
+          <p class="card-text">
+            <strong>ID:</strong> {{ p.id }} <br>
+            <strong>Email:</strong> {{ p.email }}<br>
+            <strong>Turno:</strong> {{ p.turno }}<br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+      <td>
+        <button class="btn btn-danger" (click)="delete(p)">
+            Remover
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-secondary" (click)="OnClickUpdate(p)">
+            Alterar
+      </button>
+      </td>
+    </tr>
+   </tbody>
+</table>
+</div>
